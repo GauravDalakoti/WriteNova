@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-desk: #e8ecf3;
+  --color-sheet: #fcfdff;
+  --color-ink: #1c2541;
+  --color-slate: #5b6784;
+  --color-marker: #ffe14d;
+  --color-redpen: #d92d4b;
+  --color-pine: #1b7f5c;
+  --font-sans: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-copy: "Newsreader", Georgia, serif;
+}
+
+html, body, #root { min-height: 100%; }
+body { @apply bg-desk text-ink font-sans antialiased; }
+:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@layer components {
+  .btn-ink { @apply btn bg-ink text-white hover:bg-ink/90; }
+  .btn-marker { @apply btn bg-marker text-ink hover:brightness-95; }
+  .btn-ghost { @apply btn border border-ink/25 text-ink hover:bg-ink/5; }
+  .field { @apply w-full rounded-lg border border-ink/25 bg-white px-3.5 py-2.5 text-[15px] placeholder:text-slate/60 focus:border-ink focus:outline-none focus:ring-4 focus:ring-marker/60; }
+  .label { @apply mb-1.5 block text-sm font-semibold; }
+  .hint { @apply mt-1.5 text-sm text-slate; }
+  .error { @apply mt-1.5 text-sm font-medium text-redpen; }
+  .hl { background: linear-gradient(transparent 55%, var(--color-marker) 55%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pen-write { animation: pen 1.4s ease-out both; }
+  @keyframes pen { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+}
